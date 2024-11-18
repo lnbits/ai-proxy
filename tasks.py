@@ -11,7 +11,7 @@ from loguru import logger
 
 async def wait_for_paid_invoices():
     invoice_queue = asyncio.Queue()
-    register_invoice_listener(invoice_queue, "ext_ai-proxy")
+    register_invoice_listener(invoice_queue, "ext_ai_proxy")
 
     while True:
         payment = await invoice_queue.get()
@@ -19,7 +19,7 @@ async def wait_for_paid_invoices():
 
 
 async def on_invoice_paid(payment: Payment) -> None:
-    # Will grab any payment with the tag "ai-proxy"
-    if payment.extra.get("tag") == "ai-proxy":
-        logger.info("ai-proxy extension received payment")
+    # Will grab any payment with the tag "ai_proxy"
+    if payment.extra.get("tag") == "ai_proxy":
+        logger.info("ai_proxy extension received payment")
         logger.debug(payment)

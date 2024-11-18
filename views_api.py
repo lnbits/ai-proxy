@@ -8,24 +8,24 @@ from .models import Example
 
 # views_api.py is for you API endpoints that could be hit by another service
 
-ai-proxy_ext_api = APIRouter(
+ai_proxy_ext_api = APIRouter(
     prefix="/api/v1",
-    tags=["ai-proxy"],
+    tags=["ai_proxy"],
 )
 
 
-@ai-proxy_ext_api.get("/test/{ai-proxy_data}", description="Example API endpoint")
-async def api_ai-proxy(ai-proxy_data: str) -> Example:
-    if ai-proxy_data != "00000000":
+@ai_proxy_ext_api.get("/test/{ai_proxy_data}", description="Example API endpoint")
+async def api_ai_proxy(ai_proxy_data: str) -> Example:
+    if ai_proxy_data != "00000000":
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST,
-            detail="Invalid ai-proxy data",
+            detail="Invalid ai_proxy data",
         )
     # Do some python things and return the data
-    return Example(id="2", wallet=ai-proxy_data)
+    return Example(id="2", wallet=ai_proxy_data)
 
 
-@ai-proxy_ext_api.get(
+@ai_proxy_ext_api.get(
     "/vetted",
     description="Get the vetted extension readme",
     dependencies=[Depends(require_invoice_key)],
